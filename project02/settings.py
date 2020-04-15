@@ -124,9 +124,9 @@ USE_TZ = True
  #   )
 
 MEDIA_URL= '/media/'
-MEDIA_ROOT= '/home/danastyles/django02/project02/media/'
+MEDIA_ROOT= 'http://murmuring-plateau-02281.herokuapp.com/media/'
 STATIC_URL = '/static/'
-STATIC_ROOT= '/home/danastyles/django02/project02/static/'
+STATIC_ROOT= 'http://murmuring-plateau-02281.herokuapp.com/static/'
 
 # Redirect to home URL after login (Default redirects to /accounts/profile/)
 LOGIN_REDIRECT_URL = '/'
