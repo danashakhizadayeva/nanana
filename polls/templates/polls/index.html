@@ -1,0 +1,121 @@
+<!--This is Home page. It includes the box blocks for two
+parts of the website : Record and Validation. It has some js for moving
+pictures and buttons.
+We will add some design and additional informaton such as the purpose of the wesite.-->
+{% load static %}
+<!DOCTYPE html>
+<html>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-black.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css">
+
+<head>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <link rel="stylesheet" type="text/css" href="{% static 'polls/main.css' %}">
+
+    {% if title %}
+    <title>Django Sign - {{ title }}</title>
+    {% else %}
+    <title>Django Sign</title>
+    {% endif %}
+
+</head>
+
+<body>
+        <header>
+            <div class="inner_header">
+                <div class="logo_container">
+                    <h1>Global<span>Gloss</span></h1>
+                </div>
+                <ul class="navigation">
+                    <a href="{% url 'polls-byhand' %}"><li>Contribute</li></a>
+                    <a href="{% url 'polls-about' %}"><li>About</li></a>
+                    <a href="{% url 'polls-database' %}"><li>Database</li></a>
+                    <a><li>Blank</li></a>
+                </ul>
+
+                {% if user.is_authenticated %}
+                    <div class="theLogin">
+                        Hello, {{ user.get_username }} !
+                        <a href="{% url 'logout'%}?next={{request.path}}">Logout</a>
+                    </div>   
+                {% else %}
+                    <div class="loginButton">
+                        <a class="loginButton" href="/accounts/login">Log In / Sign Up</a>
+                    </div>
+                {% endif %} 
+
+            </div>
+        </header>
+
+
+    <!-- Overlay effect when opening sidebar on small screens -->
+    <div class="w3-overlay w3-animate-opacity" onclick="w3_close()" style="cursor:pointer" title="close side menu"
+        id="myOverlay"></div>
+
+    <div class ="setka"> 
+        <div class="setochka onecolor" id="box-class" onclick="window.location.href='index/byhand'">
+            
+                        
+                    
+                        <div style="font-weight:900">Record</div> 
+                        <div style="font-size:28px">Record your video</div> 
+                        
+                        <!--<div class="show-gif" id="show-gif">
+                                <img class="img11" src="https://www.lifeprint.com/asl101/gifs-animated/showupappear.gif" alt="Be patient..." >
+
+                        </div>-->
+        </div>
+        
+        <div class="setochka twocolor" id="box-class" onclick="window.location.href='index/bytyping/'">
+        
+                        
+                        <div style="font-weight:900">Validate</div>
+                        <div style="font-size:28px">Help us by validating the video</div>
+                           <!-- <div class="show-gif" id="show-gif">
+                                    <img class="img22" src="https://www.lifeprint.com/asl101/gifs-animated/check.gif" alt="Be patient..." >
+        
+                            </div>-->
+                        <!--<div class="show-gif" id="show-gif">
+                                <img class="img22" src="https://www.lifeprint.com/asl101/gifs-animated/check.gif" alt="Be patient..." >
+
+                        </div>-->
+                
+        </div>
+        <div class="setochka onecolor"></div>
+        <div class="setochka twocolor"></div>
+        <div class="setochka twocolor"></div>
+        <div class="setochka onecolor"></div>
+        <div class="setochka twocolor"></div>
+        <div class="setochka onecolor"></div>
+        <div class="setochka onecolor"></div>
+    </div>
+
+        <script>
+            // Side navigation
+            function w3_open() {
+                var x = document.getElementById("mySidebar");
+                document.getElementById("myOverlay").style.display = "block";
+                x.style.width = "30%";
+                x.style.fontSize = "40px";
+                x.style.paddingTop = "10%";
+                x.style.display = "block";
+            }
+            function w3_close() {
+                document.getElementById("mySidebar").style.display = "none";
+                document.getElementById("myOverlay").style.display = "none";
+            }
+
+
+
+        </script>
+</body>
+
+</html>
+
+

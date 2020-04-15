@@ -1,0 +1,59 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-black.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css">
+  
+  <head>
+      <!-- Bootstrap CSS -->
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  
+      <link rel="stylesheet" type="text/css" href="{% static 'polls/main.css' %}">
+      
+      {% if title %}
+      <title>Django Sign - {{ title }}</title>
+      {% else %}
+      <title>Django Sign</title>
+      {% endif %}
+  
+  </head>
+  
+  <body>
+          <header>
+              <div class="inner_header">
+                  <div class="logo_container">
+                      <h1>Global<span>Gloss</span></h1>
+                  </div>
+                  <ul class="navigation">
+                      <a href="{% url 'polls-byhand' %}"><li>Contribute</li></a>
+                      <a href="{% url 'polls-about' %}"><li>About</li></a>
+                      <a href="{% url 'polls-database' %}"><li>Database</li></a>
+                      <a><li>Blank</li></a>
+                  </ul>
+              </div>
+          </header>
+  
+  
+      <!-- Overlay effect when opening sidebar on small screens -->
+      <div class="w3-overlay w3-animate-opacity" onclick="w3_close()" style="cursor:pointer" title="close side menu"
+          id="myOverlay"></div>
+  
+
+      
+<div class="login">
+    {% block content %}
+    <p>Logged out!</p>  
+    <a href="{% url 'login'%}">Click here to login again.</a>
+  {% endblock %}
+  </div>
+
+
+    </main>
+ </body>
+
+</html>
+

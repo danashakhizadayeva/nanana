@@ -1,0 +1,129 @@
+
+body {
+    background-color: #f3f2f1;
+}
+
+.contribution {
+    position: static;
+    justify-content: normal;
+    overflow: visible;
+    background-image: linear-gradient(0deg,var(--white) 20%,var(--desert-storm));
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    overflow-x: hidden;
+    margin: 0 auto;
+    padding: 20px;
+    max-width: 1400px;
+    max-width: var(--wide-desktop-width);
+    height: 100%;
+    width: 100%;
+    box-sizing: border-box;
+    padding-bottom: 0px;
+}
+
+.theText {
+    margin-top: 10px;
+    margin-bottom: 0px;
+    font-style: italic;
+    text-align: center;
+
+}
+
+.top {
+    display: flex;
+    align-items: center;
+}
+
+.back {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 57px;
+    height: 57px;
+    background: var(--white);
+    border-radius: 50%;
+    box-shadow: 0 2px 4px 0 
+    rgba(0, 0, 0, 0.281);
+}
+
+
+a {
+    outline: none;
+    text-decoration: none;
+}
+
+.active a{
+    color: #629ff4;
+    border-bottom: 2px solid #629ff4;
+    padding-bottom: 12px;
+    margin-left: 52px;
+    margin-right: auto;
+    font-size: 20px;
+}
+
+.links a{
+    padding-bottom: 12px;
+    margin-left: 52px;
+    margin-right: auto;
+    font-size: 20px;
+    color: #000;
+    color: var(--black);
+}
+
+.videoDiv{
+    margin: 30px auto;
+    display: flex;
+    width: 50%;
+    align-items: center;
+    justify-content: space-evenly;
+    margin-bottom: 15px;
+}
+
+.videoBox{
+    display: block;
+    width:320px;
+    height: 240px;
+    box-shadow: 4px 4px 8px 4px 
+    rgba(0, 0, 0, 0.418);
+}
+
+#timerImage {
+    position: absolute;
+    height: 240px;
+    width: 240px;
+    top: 173px;
+    left: 30.5%;
+}
+
+.videoControl {
+    margin-left: 34.7%;
+}
+
+
+.img{
+    width: 40px;
+    height: 40px;
+    margin-left: 10px;
+    margin-bottom: 5px;
+}
+
+.button {
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 8px 8px;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 15px;
+}
+
+.button:hover {
+    background-color: white;
+    color: black;
+}
+
+.disabledButton {
+    opacity: 0.3;
+}
