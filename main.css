@@ -1,0 +1,550 @@
+/*main css style code for the all the functions
+of html files*/
+
+body {
+    background: rgba(255, 255, 255, 0.705);
+    color: #050505;
+    margin-top: 0;
+    margin: 0;
+}
+  
+header {
+    width: 100%;
+    height: 80px;
+    display: block;
+    background-color: white;
+    border-bottom: 1px solid rgba(114, 112, 112, 0.253);
+}
+
+.inner_header{
+    width: 60%;
+    height: 100%;
+    display: block;
+    margin: 0 auto;
+    background-color: white;
+    color:black;
+}
+
+.logo_container{
+  height: 100%;
+  display: table;
+  float: left;
+}
+
+.logo_container h1{
+  color: black;
+  height: 100%;
+  display: table-cell;
+  vertical-align: middle;
+  font-family: "Open Sans", sans-serif;
+  font-size: 26px;
+  font-weight: 600;
+}
+
+.logo_container h1 span{
+  font-weight: 600;
+}
+
+.navigation{
+  margin-left: 15%;
+  height: 100%;
+}
+
+.navigation a{
+  height: 100%;
+  display: table;
+  float: left;
+  padding: 0px 20px;
+}
+
+.navigation a:last-child{
+  padding-right: 0;;
+
+}
+
+.navigation a li{
+  display: table-cell;
+  vertical-align: middle;
+  height: 100%;
+  color: black;
+  font-family: "Open Sans", sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+div.loginButton {
+  float:right;
+  height: 100%;
+  display: block;
+  color: black;
+  font-family: "Open Sans", sans-serif;
+  font-size: 14px;
+  position:relative;
+  bottom: 100px;
+  z-index: 10;
+  margin-right: 0px;
+}
+
+a.loginButton {
+  vertical-align: middle;
+  height: 100%;
+  color: black;
+  font-family: "Open Sans", sans-serif;
+  font-size: 14px;
+  position:relative;
+  top: 35px;
+  font-weight: 600;
+  border-style: solid;
+  border-color: lightgray;
+  border-width: 1px;
+  padding: 10px;
+  border-radius: 20px;
+}
+
+a.loginButton:hover {
+  border-color: black;
+}
+
+.setka {
+  display:grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 40px;
+  grid-auto-rows: 220px;
+  width: 50%;
+  position: relative;
+  left: 25%;
+  margin-top: 50px;
+}
+
+.setochka {
+  text-align: center;
+  vertical-align: middle;
+  font-family: "Open Sans", sans-serif;
+  font-size: 48px;
+  font-weight: 600;
+  padding-top:8%;
+}
+
+.onecolor {
+  background-color: #8BCBC8;
+  color:white;
+}
+
+.onecolor:hover {
+  background-color: #DAE9E4;
+  color:black;
+}
+
+.twocolor {
+  background-color: #FDAE84;
+  color:white;
+}
+
+.twocolor:hover {
+  background-color: #ECC7C0;
+  color:black;
+}
+
+.bg-steel {
+    background-color: #0c0c3859;
+}
+  
+.site-header .navbar-nav .nav-link {
+    color: #cbd5db;
+}
+  
+.site-header .navbar-nav .nav-link:hover {
+    color: #ffffff;
+}
+  
+.site-header .navbar-nav .nav-link.active {
+    font-weight: 500;
+}
+  
+.content-section {
+    background: #e7e5e5b0;
+    padding: 10px 20px;
+    border: 1px solid #dddddd;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+  
+.article-title {
+    color: #444444;
+}
+  
+a.article-title:hover {
+    color: #93989c;
+    text-decoration: none;
+}
+  
+.article-content {
+    white-space: pre-line;
+}
+  
+.article-img {
+    height: 65px;
+    width: 65px;
+    margin-right: 16px;
+}
+  
+.article-metadata {
+    padding-bottom: 1px;
+    margin-bottom: 4px;
+    border-bottom: 1px solid #e3e3e3
+}
+  
+.article-metadata a:hover {
+    color: rgb(153, 19, 19);
+    text-decoration: none;
+}
+  
+.article-svg {
+    width: 25px;
+    height: 25px;
+    vertical-align: middle;
+}
+  
+.account-img {
+    height: 125px;
+    width: 125px;
+    margin-right: 20px;
+    margin-bottom: 16px;
+}
+  
+.account-heading {
+    font-size: 2.5rem;
+}
+
+.wrap {max-width: 1200px;} 
+
+
+
+
+.button1 {
+  margin-top: 0;
+    font-size-adjust: 0.2;
+    
+    background: rgba(255, 255, 255, 0.61);
+    display: block;
+    border-radius: 50%;
+    height: 85px;
+    width: 85px;
+    display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "sans-serif";
+  font-weight: bold;
+  border-color: red;
+  color: red;
+  transition: all 0.2s ease-in-out;
+  
+}  
+
+.glow-button1 {
+  color: rgb(255, 0, 0);
+  box-shadow: 0 15px 55px rgba(255, 0, 0, 0.473);
+ }
+
+ .glow-button1:hover {
+  color: rgb(255, 255, 255);
+  background-color: red;
+  box-shadow: 0 15px 55px rgb(255, 0, 0);
+ }
+
+.button2 {
+  margin-top: 0;
+        font-size-adjust: 0.2;
+        
+        background: rgba(255, 255, 255, 0.61);
+        display: block;
+        border-radius: 50%;
+        height: 85px;
+        width: 85px;
+        display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-family: "sans-serif";
+    font-weight: bold;
+    border-color: blue;
+    color: blue;
+    transition: all 0.2s ease-in-out;
+}  
+
+.glow-button2 {
+  color: rgb(0, 0, 255);
+  box-shadow: 0 15px 55px rgba(0, 0, 255, 0.473);
+ }
+
+ .glow-button2:hover {
+  color: rgb(255, 255, 255);
+  background-color: blue;
+  box-shadow: 0 15px 55px rgb(0, 0, 255);
+ }
+
+#foo3 {
+    color: white;
+    font-family: "sans-serif";
+}  
+
+#foo4 {
+    color: white;
+    font-family: "sans-serif";
+    font-size: 4.5em;
+}
+
+#mySidebar{
+  color: black;
+  background-color: white;
+  width: 50px;
+
+}
+
+.red-box, .blue-box{
+  float: left;
+}
+
+.blue-box {
+  position: absolute;
+  left: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+    right: 50%;
+  height:500px;
+  width:50%;
+  background-color:rgb(255, 255, 255);
+  display: inline-block;
+  transition: width 1s;
+  border-right: 1px solid rgba(146, 141, 141, 0);
+  }
+  
+.red-box {
+  position: absolute;
+  left: 50%;
+    margin-top: 0;
+    margin-bottom: 0;
+    right: 0;
+  height:500px;
+  background-color:rgb(255, 255, 255);
+  display: inline-block;
+  
+    transition: 1s;
+  border-left: 1px solid rgba(146, 141, 141, 0);
+  }
+
+  #blue-box:hover{
+    width: 60%;
+    
+  }
+
+  #red-box:hover{
+    left: 40%;
+  }
+
+  .blue-box .button1 {
+    position: fixed;
+      top: 210px; /*your button position*/
+      left: 600px; /*your button position*/
+  }
+
+  .blue-box .img11{
+    position: fixed;
+      top: 427px; /*your button position*/
+      left: 540px; /*your button position*/
+  }
+
+  .blue-box .record{
+    position: absolute;
+      top: 110px; /*your button position*/
+      left: 150px; /*your button position*/
+  }
+
+  .blue-box .record1{
+    position: absolute;
+      top: 220px; /*your button position*/
+      left: 160px; /*your button position*/
+  }
+
+  .red-box .button2 {
+    position: fixed;
+    top: 210px; /*your button position*/
+    left: 1600px; /*your button position*/
+}
+
+.red-box .img22{
+  position: fixed;
+    top: 427px; /*your button position*/
+    left: 1260px; /*your button position*/
+}
+
+.red-box .validate{
+  position: absolute;
+      top: 110px; /*your button position*/
+      left: 150px; /*your button position*/
+}
+
+.red-box .validate1{
+  position: absolute;
+      top: 220px; /*your button position*/
+      left: 150px; /*your button position*/
+}
+
+
+#red-box:hover + #blue-box {
+    margin-top:200px;
+}
+
+#blue-box:hover + #red-box {
+    margin-top:200px;
+}
+
+.img1, .img2{
+  float:left;
+}
+
+.img1{
+  height: 500px;
+  width: 100%;
+  opacity: 0.5;
+  transition: 1s ;
+}
+
+.img2{
+  height: 500px;
+  width: 100%;
+  opacity: 0.5;
+  transition: 1s ;
+}
+
+img {
+  height: 153px;
+  width: 180px;
+}
+
+.img11{
+  height: 153px;
+  width: 180px;
+}
+
+.img22{
+  height: 153px;
+  width: 180px;
+}
+
+.record{
+  color: rgb(0, 0, 0);
+    font-family: "Open Sans", sans-serif;
+    font-size: 4.5em;
+}
+
+.validate{
+  color: rgb(0, 0, 0);
+    font-family: sans-serif;
+    font-size: 4.5em;
+}
+
+.record1{
+  color: rgb(0, 0, 0);
+    font-family: 'Montserrat';
+    font-size: 1.5em;
+}
+
+.validate1{
+  color: rgb(0, 0, 0);
+    font-family: 'Montserrat';
+    font-size: 1.5em;
+}
+
+#arrow-left {
+  width: 96px;
+  height:96px;
+  position: relative;
+  float:left;
+  }
+#arrow-left_up {
+  background:url('http://placekitten.com/g/100/100');
+  width:96px;
+  height:96px;
+  position: absolute;
+}
+#arrow-left_over {
+  background:url('http://placekitten.com/100/100');
+  width:0px;
+  height:96px;
+  position: absolute;
+  right: 0px;
+  top:0px;
+  -webkit-transition: all 0.2s ease-out; 
+     -moz-transition: all 0.2s ease-out; 
+       -o-transition: all 0.2s ease-out; 
+          transition: all 0.2s ease-out;
+}
+#arrow-left:hover #arrow-left_over {
+width: 96px;
+-webkit-transition: all 0.2s ease-out; 
+ -moz-transition: all 0.2s ease-out; 
+   -o-transition: all 0.2s ease-out; 
+      transition: all 0.2s ease-out;
+}
+
+
+#arrow-right {
+  width: 96px;
+  height:96px;
+  position: relative;
+  float:left;
+}
+#arrow-right_up {
+  background:url('http://placekitten.com/g/100/100');
+  width:96px;
+  height:96px;
+  position: absolute;
+}
+#arrow-right_over {
+  background:url('http://placekitten.com/100/100');
+  width:0px;
+  height:96px;
+  position: absolute;
+  left: 0px;
+  top:0px;
+  -webkit-transition: all 0.2s ease-out; 
+     -moz-transition: all 0.2s ease-out; 
+       -o-transition: all 0.2s ease-out; 
+          transition: all 0.2s ease-out;
+}
+#arrow-right:hover #arrow-right_over {
+  width: 96px;
+  -webkit-transition: all 0.2s ease-out; 
+     -moz-transition: all 0.2s ease-out; 
+       -o-transition: all 0.2s ease-out; 
+          transition: all 0.2s ease-out;
+}
+
+
+.login {
+  width: 30%;
+  margin: 30px auto;
+  text-align: center;
+}
+
+.forForm {
+  width: 70%;
+  margin: 20px auto;
+  margin-bottom: 0px;
+}
+
+table {
+  margin-bottom: 10px;
+}
+
+.theLogin {
+  float:right;
+  height: 100%;
+  display: block;
+  font-family: "Open Sans", sans-serif;
+  font-size: 14px;
+  position:relative;
+  bottom: 65px;
+  margin-right: 0px;
+
+}
