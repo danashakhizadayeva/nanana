@@ -1,0 +1,216 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Recording</title>
+    <link href="https://www.w3schools.com/w3css/4/w3.css" rel="stylesheet" type="text/css">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="{% static 'polls/byhand.css' %}">
+
+</head>
+
+<body>
+	<main>
+    <div class="contribution">
+        <div class="top">
+			<a class="back" href="/">
+				<svg width="24" height="24" viewBox="0 0 24 24">
+				  <defs><path id="a0" d="M18 7c0 .6-.4 1-1 1H3.4l4.3 4.3c.4.4.4 1 0 1.4-.2.2-.4.3-.7.3-.3 0-.5-.1-.7-.3l-6-6c-.1-.1-.2-.2-.2-.3-.1-.2-.1-.5 0-.8.1-.1.1-.2.2-.3l6-6c.4-.4 1-.4 1.4 0 .4.4.4 1 0 1.4L3.4 6H17c.6 0 1 .4 1 1z"></path></defs>
+				  <g fill="none" fill-rule="evenodd" transform="translate(3 5)">
+					<mask id="b0" fill="#fff"><use xlink:href="#a0"></use></mask>
+					<use fill="#000" fill-rule="nonzero" xlink:href="#a0"></use>
+					<g fill="#4A4A4A" mask="url(#b0)"><path d="M-3-5h24v24H-3z"></path></g></g>
+				</svg>
+			</a>
+            <div class="active">
+                <a href="/index/byhand">Record</a>
+			</div>
+            <div class="links">
+				<a href="/index/bytyping">Validate</a>
+			</div>
+            <div style="margin-left: 850px; font-style: italic;">
+				<a href="/mypage">My Profile</a>
+				<img class="img" src="https://www.freepngimg.com/thumb/google/66726-customer-account-google-service-button-search-logo.png">
+            </div>
+        </div>
+    </div>
+      
+        <div>
+          <p class="theText">Please show the following sentence:</p>
+          <p class="theText" id=ourtext></p>
+        </div>
+
+        <div class="videoDiv" id="form2">
+            <div class="videoBox">
+                <video id="vid1" width="320" height="240" autoplay="false"></video>
+            </div>
+            
+            <div class="videoBox">
+                <video id="vid2" width="320" height="240" controls></video>
+            </div>
+        </div>
+
+        <div class="videoControl">
+            <img class="img" id="btnStart" src="../../media/images/record.png">
+            <img class="img" id="btnStop" src="https://cdn0.iconfinder.com/data/icons/circle-multimedia-player-button-1/512/media_player_button_11-512.png">
+        </div>
+
+        
+        <div style="text-align:center;">
+            {% csrf_token %}
+            <button class="button button1" onclick="mymyfile()">Upload</button>
+        </div>
+        <div style="text-align:center;">
+            <progress id="progressBar" value="0" max="100" class="rm-progress"></progress>
+            <div id="percentageCalc"></div>
+        </div>
+
+
+
+    </main>
+    <script>
+        let constraintObj = {
+            audio: false,
+            video: {
+                facingMode: "user",
+                width: { min: 230, ideal: 1470, max: 900 },
+                height: { min: 240, ideal: 850, max: 400 }
+            }
+        };
+       
+        var myfile = new File([""], "myfile");;
+        navigator.mediaDevices.getUserMedia(constraintObj)
+            .then(function (mediaStreamObj) {
+                //connect the media stream to the first video element
+                let video = document.querySelector('#vid1');
+                video.srcObject = mediaStreamObj;
+                video.onloadedmetadata = function (ev) {
+                    //show in the video element what is being captured by the webcam
+                    video.play();
+                };
+
+                //add listeners for saving video/audio
+                let start = document.getElementById('btnStart');
+                let stop = document.getElementById('btnStop');
+                let vidSave = document.getElementById('vid2');
+
+                let mediaRecorder = new MediaRecorder(mediaStreamObj);
+                let chunks = [];
+
+                start.addEventListener('click', (ev) => {
+                    let theBody = document.querySelector('html');
+                    let timerImage = document.createElement('img');
+                    timerImage.setAttribute('id', 'timerImage');
+                    timerImage.setAttribute('src','../../media/images/3.png')
+                    theBody.appendChild(timerImage);
+                    video.style.opacity = '0.2';
+                    setTimeout(function run(){
+                    timerImage.setAttribute('src', '../../media/images/2.png')
+                        setTimeout(function run(){
+                        timerImage.setAttribute('src', '../../media/images/1.png')
+                            setTimeout(function run(){
+                                video.style.opacity = '1';
+                                theBody.removeChild(timerImage);
+                                mediaRecorder.start();
+                                console.log(mediaRecorder.state);
+                                start.setAttribute('src', '../../media/images/isrecording.png');
+                            }, 1000)
+                        }, 1000)
+                    }, 1000)
+
+
+                })
+                stop.addEventListener('click', (ev) => {
+                    mediaRecorder.stop();
+                    console.log(mediaRecorder.state);
+                    start.setAttribute('src', '../../media/images/record.png');
+                });
+                mediaRecorder.ondataavailable = function (ev) {
+                    chunks.push(ev.data);
+                }
+                mediaRecorder.onstop = (ev) => {
+                    var blob = new Blob(chunks, { 'type': 'video/mp4;' });
+                    chunks = [];
+                    var videoURL = window.URL.createObjectURL(blob);
+                    vidSave.src = videoURL;
+                    myfile = blobToFile(blob, "video.mp4")
+                    console.log(5 + 6);
+                }
+            })
+            .catch(function (err) {
+                console.log(err.name, err.message);
+            });
+
+        function blobToFile(theBlob, fileName) {
+            //A Blob() is almost a File() - it's just missing the two properties below which we will add
+            theBlob.lastModifiedDate = new Date();
+            theBlob.name = fileName;
+            return theBlob;
+        }
+
+        function mymyfile() {
+            var formData = new FormData();
+            formData.append("myfile", myfile);
+            var xhr = new XMLHttpRequest();
+            //xmlHTTP.upload.addEventListener("loadstart", loadStartFunction, false);
+            xhr.upload.addEventListener("progress", progressFunction, false);
+            xhr.addEventListener("load", transferCompleteFunction, false);
+            xhr.addEventListener("error", uploadFailed, false);
+            xhr.addEventListener("abort", uploadCanceled, false);
+            xhr.open('POST', '');
+            xhr.setRequestHeader("X-CSRFToken", "{{ csrf_token }}");
+            xhr.send(formData);
+
+        }
+        
+
+        function progressFunction(evt) {
+            var progressBar = document.getElementById("progressBar");
+            var percentageDiv = document.getElementById("percentageCalc");
+            if (evt.lengthComputable) {
+                progressBar.max = evt.total;
+                progressBar.value = evt.loaded;
+                percentageDiv.innerHTML = Math.round(evt.loaded / evt.total * 100) + "%";
+            }
+        }
+
+        function loadStartFunction(evt) {
+            alert('Starting to upload the file');
+        }
+        function transferCompleteFunction(evt) {
+            alert('Upload Complete');
+            var progressBar = document.getElementById("progressBar");
+            var percentageDiv = document.getElementById("percentageCalc");
+            progressBar.value = 100;
+            percentageDiv.innerHTML = "100%";
+        }
+
+        function uploadFailed(evt) {
+            alert("There was an error uploading the file");
+        }
+
+        function uploadCanceled(evt) {
+            alert("The operation was canceled or the connection was interrupted");
+        }
+       
+
+        window.onload = function() {
+            fetch('../../mymytext/', { mode: 'cors' })
+                .then(function (response) {
+                    return response.text();
+                })
+                .then(function (text) {
+                    document.getElementById("ourtext").innerHTML = text;
+                })
+                .catch(function (error) {
+                    log('Request failed', error)
+                });
+        }
+
+
+    </script>
+</body>
+
+</html>

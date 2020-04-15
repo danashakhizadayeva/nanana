@@ -1,0 +1,323 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+<title>Validation</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="{% static 'polls/tmp.css' %}">
+
+</head>
+<body>
+
+<div class="contribution">
+  <div class="top">
+    <a class="back" href="/">
+      <svg width="24" height="24" viewBox="0 0 24 24">
+        <defs><path id="a0" d="M18 7c0 .6-.4 1-1 1H3.4l4.3 4.3c.4.4.4 1 0 1.4-.2.2-.4.3-.7.3-.3 0-.5-.1-.7-.3l-6-6c-.1-.1-.2-.2-.2-.3-.1-.2-.1-.5 0-.8.1-.1.1-.2.2-.3l6-6c.4-.4 1-.4 1.4 0 .4.4.4 1 0 1.4L3.4 6H17c.6 0 1 .4 1 1z"></path></defs>
+        <g fill="none" fill-rule="evenodd" transform="translate(3 5)">
+          <mask id="b0" fill="#fff"><use xlink:href="#a0"></use></mask>
+          <use fill="#000" fill-rule="nonzero" xlink:href="#a0"></use>
+          <g fill="#4A4A4A" mask="url(#b0)"><path d="M-3-5h24v24H-3z"></path></g></g></svg></a>
+          <div class="links">
+            <a href="/index/byhand">Record</a></div>
+          <div class="active">
+            <a href="/index/bytyping">Validate</a></div>
+          <div style="margin-left: 850px; font-style: italic;">
+            <a href="/mypage">My Profile</a>
+            <img class="img" src="https://www.freepngimg.com/thumb/google/66726-customer-account-google-service-button-search-logo.png">
+          </div>
+          </div>
+        </div>
+
+  <main>
+
+    <div class="videoBox" id="video_show">
+		<video id="vid1" controls></video>
+    </div>
+    
+    <div id="validation_container"></div>
+
+	<div id="forButtons" style="text-align:center;">
+		<button class="button disabledButton" id="btnYes" onclick="" disabled>Yes</button>
+		<button class="button disabledButton" id="btnNo" onclick="" disabled>No</button>
+		<button class="button disabledButton" id="btnUpload" onclick="sendResponse()" disabled>Upload your answers</button>
+  </div>
+
+     <div id="forScreenshotButton">
+     </div>
+  
+  <div id="forScreenshots">
+  </div>
+  </main>
+
+  <script>
+    
+    window.onload = function () {
+      fetch('../../video_access/', { mode: 'cors' })
+        .then(function (response) {
+          return response.text();
+        })
+        .then(function (text) {
+          console.log(text);
+          document.getElementById("video_show").innerHTML = "<video height='206' width='252' id='vid1' src='" + "../../" + text + "' controls></video>"
+        })
+        .catch(function (error) {
+          log('Request failed', error)
+        });
+
+      show_images();  
+    }
+
+  var images = "";
+  var image_container = [];
+	let confirmation = 0;
+	let button_yes = document.querySelector('#btnYes');
+  let button_no = document.querySelector('#btnNo');
+  let imageFile;
+  let theResponseText="";
+
+  async function show_images() {
+        await image_access();
+        await image_to_array();
+        let container = document.querySelector('#validation_container');
+
+        for(let i=0;i < image_container.length; i++){
+          let image_div = document.createElement('div');
+          let div_id = 'div' + i;
+          image_div.setAttribute('id', div_id);
+          image_div.style.width = "145px";
+
+          let hand_image = document.createElement('img');
+          let image_id = 'image' + i;
+          hand_image.setAttribute('id', image_id);
+          let temp = '../../media/handshapes/' + image_container[i].toString() + '.jpg'; 
+          hand_image.setAttribute('src', temp);
+          hand_image.setAttribute('onclick', 'imageSelector("' + i + '")');
+
+          image_div.appendChild(hand_image);
+          container.appendChild(image_div);
+        }
+        
+        let add_image = document.createElement('img');
+        add_image.setAttribute('id', 'addButton');
+        add_image.setAttribute('src', '../../media/images/plus.png');
+        add_image.setAttribute('onclick', 'transformButton()'); 
+        add_image.setAttribute('width', '75');
+        add_image.setAttribute('height', '75');
+        container.appendChild(add_image);
+
+    }
+
+    function imageSelector(i){
+      for(let x = 0; x < image_container.length; x++){
+        let tempImage = document.querySelector('#image' + x);
+        tempImage.setAttribute('class', '');
+      }
+      let selected_image = document.querySelector('#image' + i);
+      selected_image.setAttribute('class', 'selectedImage');
+
+      button_yes.setAttribute('onclick', 'selectYes("' + i + '")');
+      button_no.setAttribute('onclick', 'selectNo("' + i + '")');
+	    button_yes.disabled = false;
+	    button_no.disabled = false;
+      button_yes.setAttribute('class', 'button');
+      button_no.setAttribute('class', 'button');
+    }
+
+    function selectYes(i){
+      let selected_div = document.querySelector('#div' + i);
+      var already_yes = document.querySelector('#yes' + i);
+      var already_no = document.querySelector('#no' + i);
+      if (already_yes !== null){
+      } 
+      else{
+        if(already_no !== null){
+          selected_div.removeChild(already_no);
+		  confirmation--;
+        }
+        let yes_image = document.createElement('img');
+        yes_image.setAttribute('src', '../../media/images/yes.png');
+        yes_image.setAttribute('id', "yes" + i);
+        yes_image.setAttribute('width', '70');
+        yes_image.setAttribute('height', '70');
+        yes_image.setAttribute('class', 'onTop');
+        selected_div.appendChild(yes_image);
+		
+		confirmation++;
+      }
+	  
+		if(confirmation === image_container.length){
+			let ResponseButton = document.querySelector('#btnUpload');
+			ResponseButton.disabled = false;
+      ResponseButton.setAttribute('class', 'button');
+		}
+    }
+
+    function selectNo(i){
+      let selected_div = document.querySelector('#div' + i);
+      var already_yes = document.querySelector('#yes' + i);
+      var already_no = document.querySelector('#no' + i);
+      if (already_no !== null){
+      } 
+      else {
+        if(already_yes !== null){
+          selected_div.removeChild(already_yes);
+		  confirmation--;
+        }
+        let no_image = document.createElement('img');
+        no_image.setAttribute('src', '../../media/images/no.png');
+        no_image.setAttribute('id', "no" + i);
+        no_image.setAttribute('width', '70');
+        no_image.setAttribute('height', '70');
+        no_image.setAttribute('class', 'onTop');
+        selected_div.appendChild(no_image);
+		
+		confirmation++;
+      }
+	  
+	  	if(confirmation === image_container.length){
+			let ResponseButton = document.querySelector('#btnUpload');
+			ResponseButton.disabled = false;
+      ResponseButton.setAttribute('class', 'button');
+		}
+    }
+
+    function sendResponse(){
+      for(let i=0;i < image_container.length; i++){
+        if(document.querySelector('#yes' + i) !== null){
+          theResponseText = theResponseText + "1 ";
+        }
+        else {
+          theResponseText = theResponseText + "0 ";
+        }
+      }
+      theResponseText = theResponseText.substring(0, theResponseText.length - 1);
+
+      //var data = {text: theResponseText};
+      //var myJSON = JSON.stringify(data);
+      //console.log(myJSON);
+      let xhr = new XMLHttpRequest();
+      xhr.open("POST", '../../checkresults/', true);
+      xhr.responseType = "text";
+      xhr.setRequestHeader("X-CSRFToken", "{{ csrf_token }}");
+      xhr.send(theResponseText);
+
+      button_yes.disabled = true;
+	    button_no.disabled = true;
+      button_yes.setAttribute('class', 'button disabledButton');
+      button_no.setAttribute('class', 'button disabledButton');
+      let button_upload = document.querySelector('#btnUpload');
+      button_upload.disabled = true;
+      button_upload.setAttribute('class', 'button disabledButton');
+    }
+    async function image_to_array() {
+      images = images.replace(/\n/g, '');
+      var myArray = images.split(" ");
+      for (var i = 0; i < myArray.length; i++) { image_container[i] = +myArray[i]; }
+    }
+
+    async function image_access() {
+      var check = 0;
+      let response = await fetch('../../image_access/', {
+        method: 'GET',
+      });
+      images = await response.text();
+    }
+
+  function transformButton() {
+    let diviwe = document.querySelector('#forScreenshotButton');
+    let screenShotButton = document.createElement('button');
+    screenShotButton.setAttribute('class', 'screenshotButton');
+    screenShotButton.setAttribute('id',"takeScreen");
+    screenShotButton.innerHTML='Take the Screenshot';
+    screenShotButton.setAttribute('onclick','takeScreen(0)');
+    diviwe.appendChild(screenShotButton);
+    
+
+    let addButton = document.querySelector('#addButton');
+    addButton.style.opacity = '0.2';
+    addButton.setAttribute('onclick', ''); 
+
+  }      
+
+  function takeScreen(retake) {
+    let theBody = document.querySelector('#forScreenshots');
+
+    if(retake === 1){
+      theBody.removeChild(theBody.lastChild);
+    }
+
+    let canvas = document.createElement('canvas');
+    canvas.setAttribute('id', 'canvas');
+    canvas.style.width = '640';
+    canvas.style.height = '480';
+    theBody.appendChild(canvas);
+
+    let video=document.querySelector('video');
+    var context=canvas.getContext('2d');
+    var w,h,ratio;
+
+    ratio = video.videoWidth/video.videoHeight;
+    w = video.videoWidth-100;
+    h = parseInt(w/ratio,10);
+    canvas.width = w;
+    canvas.height = h;
+ 
+    context.fillRect(0,0,w,h);
+    context.drawImage(video,0,0,w,h);
+
+    if(retake ==0){
+      let diviwe = document.querySelector('#forScreenshotButton');
+      let screenshotUpload = document.createElement('button');
+      screenshotUpload.setAttribute('class', 'screenshotButton');
+      screenshotUpload.setAttribute('id', 'screenshotUpload')
+      screenshotUpload.innerHTML='Upload Screenshot';
+      screenshotUpload.setAttribute('onclick','screenUpload()');
+      diviwe.appendChild(screenshotUpload);
+    }
+
+    let screenShotButton = document.querySelector('#takeScreen');
+    screenShotButton.innerHTML ='Retake the Screenshot';
+    screenShotButton.setAttribute('onclick', 'takeScreen(1)');
+
+
+  }
+
+  async function screenUpload() {
+
+          var canvas = document.querySelector('#canvas');
+          canvas.toBlob(theUploader);
+
+          async function theUploader(blob){
+            var myfile = new File([blob], "name");
+            var formData = new FormData();
+            formData.append("myfile", myfile);
+            var xhr = await new XMLHttpRequest();
+            await xhr.open('POST', '');
+            await xhr.setRequestHeader("X-CSRFToken", "{{ csrf_token }}");
+            await xhr.send(formData);
+          }
+          
+          await canvas.remove; 
+
+           let addButton = document.querySelector('#addButton');
+           addButton.style.opacity = '1';
+           addButton.setAttribute('onclick', 'transformButton()'); 
+            
+            let screenUpload = document.querySelector('#screenshotUpload');
+            let takeScreen = document.querySelector('#takeScreen');
+            screenUpload.remove();
+            takeScreen.remove();
+  }
+
+    </script>
+
+
+
+</body>
+</html>
+
+
+

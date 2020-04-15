@@ -1,0 +1,127 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>Handshape Checking</title>
+  <link href="https://www.w3schools.com/w3css/4/w3.css" rel="stylesheet" type="text/css">
+  <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" type="text/css" href="{% static 'polls/main2.css' %}">
+</head>
+
+<body>
+
+  <h1 style="text-align:center;">Handshape Checking</h1>
+
+  <main>
+    <p style="text-align:center;">
+      Hello dear contributor. Please help us by Checking handshapes for the sentence, whether you can see in this video
+      the handshapes that the Machine Learning Program has recognized
+    </p>
+
+    <div style="text-align:center;" id="video_show">
+      <video id="vid1" controls></video>
+    </div>
+
+    <div style="text-align:center;">
+      <button class="button button1" id="btn" onclick="show_images()">Validate Handshapes</button>
+    </div>
+
+    <div style="text-align:center;" id="imagess">
+      <img src="pic_trulli.jpg" alt="Hand">
+      <!--Image here for checking and in the end thank you-->
+    </div>
+
+    <div style="text-align:center;">
+      <button class="button button2" id="btnYes" onclick="show_images()">Yes</button>
+      <button class="button button3" id="btnNo" onclick="show_images()">No</button>
+      <!--Should be hidden in the end-->
+    </div>
+
+  </main>
+  <script>
+
+    function mymyfile() {
+      var formData = new FormData();
+      formData.append("myfile", myfile);
+      var xhr = new XMLHttpRequest();
+      //xmlHTTP.upload.addEventListener("loadstart", loadStartFunction, false);
+      xhr.upload.addEventListener("progress", progressFunction, false);
+      xhr.addEventListener("load", transferCompleteFunction, false);
+      xhr.addEventListener("error", uploadFailed, false);
+      xhr.addEventListener("abort", uploadCanceled, false);
+      xhr.open('POST', '');
+      xhr.setRequestHeader("X-CSRFToken", "{{ csrf_token }}");
+      xhr.send(formData);
+
+    }
+
+
+    window.onload = function () {
+      fetch('../../video_access/', { mode: 'cors' })
+        .then(function (response) {
+          return response.text();
+        })
+        .then(function (text) {
+          console.log(text);
+          document.getElementById("video_show").innerHTML = "<video src='" + "../../" + text + "' controls></video>"
+        })
+        .catch(function (error) {
+          log('Request failed', error)
+        });
+    }
+    var image_began = 0;
+    var images = "";
+    var image_number = 0;
+    var image_container = [];
+    var started = 0;
+
+    function show_images() {
+      if (started == 0) {
+        image_access();
+        started = 1;
+        show_images();
+      }
+      else if (started == 1 && images == "") {
+        show_images();
+      }
+      else if (image_began == 0) {
+        image_to_array();
+        image_began = 1;
+        show_images();
+      }
+      else {
+        var temp = image_container[image_number].toString();
+        document.getElementById("imagess").innerHTML = "<img src='" + "../../" + "media/handshapes/" + temp + ".jpg'" + " alt='Italian Trulli'>"
+        image_number = image_number + 1;
+      }
+    }
+
+    function image_to_array() {
+      images = images.replace(/\n/g, '');
+      var myArray = images.split(" ");
+      for (var i = 0; i < myArray.length; i++) { image_container[i] = +myArray[i]; }
+      console.log(image_container);
+    }
+
+
+    function image_access() {
+      var check = 0;
+      var xhr = new XMLHttpRequest();
+      xhr.open('GET', '../../image_access/');
+      xhr.send();
+      xhr.addEventListener("readystatechange", processRequest, false);
+      xhr.onreadystatechange = processRequest;
+      function processRequest(e) {
+        if (xhr.readyState == 4 && xhr.status == 200 && check == 0) {
+          images = xhr.responseText;
+          check = 1;
+        }
+      }
+    }
+
+  </script>
+</body>
+
+</html>

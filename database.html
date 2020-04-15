@@ -1,0 +1,21 @@
+<!--This is Database page. We just need it to put the database items
+from django-->
+{% extends "polls/base.html" %}
+{% block content %}
+<h1>Database</h1>
+{% for sign in signs %}
+<article class="media content-section">
+    <div class="media-body">
+        <div class="article-metadata">
+            <a class="mr-2" href="#">{{ sign.author }}</a>
+            <small class="text-muted">{{ sign.date_posted }}</small>
+        </div>
+        <h2><a class="article-title" href="">{{ sign.title }}</a></h2>
+        <p class="article-content">{{ sign.content }}</p>
+        <p class="article-region">{{ sign.region }}</p>
+    </div>
+</article>
+
+
+{% endfor %}
+{% endblock content %}
