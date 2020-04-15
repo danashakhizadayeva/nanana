@@ -124,9 +124,10 @@ USE_TZ = True
  #   )
 
 MEDIA_URL= '/media/'
-MEDIA_ROOT= '../media/'
+MEDIA_ROOT= os.path.join(os.path.abspath(os.path.dirname(__file__)), 'media')
 STATIC_URL = '/static/'
 STATIC_ROOT= '../static/'
+ADMIN_MEDIA_PREFIX = '/media/admin/'
 
 # Redirect to home URL after login (Default redirects to /accounts/profile/)
 LOGIN_REDIRECT_URL = '/'
