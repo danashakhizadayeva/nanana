@@ -1,1 +1,1 @@
-web: node server.js
+web: gunicorn project02.wsgi --log-file -
