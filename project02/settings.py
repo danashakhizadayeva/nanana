@@ -124,9 +124,9 @@ USE_TZ = True
  #   )
 
 MEDIA_URL= '/media/'
-MEDIA_ROOT= '/media/'
+MEDIA_ROOT= '../media/'
 STATIC_URL = '/static/'
-STATIC_ROOT= '/static/'
+STATIC_ROOT= '../static/'
 
 # Redirect to home URL after login (Default redirects to /accounts/profile/)
 LOGIN_REDIRECT_URL = '/'
